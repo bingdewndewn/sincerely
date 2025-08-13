@@ -1,0 +1,173 @@
+STRICT PROPRIETARY SOFTWARE LICENSE AGREEMENT​
+​Version 1.0 | Effective Date: 10 August 2025
+
+​1. Grant of License​
+1.1 ​Limited, Non-Exclusive, Non-Transferable License:
+Licensor grants Licensee a revocable, non-exclusive license to install and use the Software solely on ​one designated device​ for ​internal business purposes. No rights to modify, distribute, sublicense, or transfer the Software are granted 
+.
+
+1.2 ​Restrictions on Deployment:
+Software may not be used in:
+
+High-risk systems (e.g., aviation, medical, nuclear, military) where failure could cause personal injury, death, or catastrophic loss;
+Cloud services (SaaS, PaaS) or publicly accessible networks without prior written consent 
+.
+​2. Intellectual Property Rights​
+2.1 ​Exclusive Ownership:
+All rights, title, and interest in the Software (including source code, algorithms, documentation, and derivatives) remain the sole property of Licensor. Licensee obtains ​zero ownership rights​ 
+.
+
+2.2 ​Prohibition on Reverse Engineering:
+Licensee shall not:
+
+Reverse engineer, decompile, or disassemble the Software;
+Bypass security mechanisms or digital rights management;
+Remove copyright/watermark notices 
+.
+​3. Confidentiality​
+3.1 ​Definition of Confidential Information:
+Includes Software binaries, documentation, performance data, and any technical details disclosed by Licensor.
+
+3.2 ​Obligations:
+Licensee must:
+
+Restrict access to employees with a "need-to-know";
+Implement security measures equivalent to ​AES-256 encryption​ for stored copies;
+Report unauthorized breaches within ​24 hours​ 
+Not permitted to forward the links of this website.
+.
+​4. Warranty Disclaimer & Liability Limitation​
+4.1 ​No Warranties:
+Software is provided "​AS IS​" without warranties of performance, merchantability, or fitness for a purpose. Licensor does not guarantee error-free operation 
+.
+
+4.2 ​Zero Liability:
+Licensor shall ​not be liable​ for:
+
+Direct, indirect, or consequential damages (e.g., data loss, revenue loss);
+Claims exceeding the total fees paid by Licensee;
+Third-party claims arising from Licensee’s misuse 
+.
+​5. Termination​
+5.1 ​Immediate Termination Triggers:
+
+Breach of Sections 1, 2, or 3;
+Bankruptcy or insolvency of Licensee;
+Unauthorized copying or distribution 
+.
+5.2 ​Post-Termination Obligations:
+Licensee must:
+
+Destroy all copies of Software and certify compliance;
+Return confidential materials within ​7 days​ 
+.
+​6. Legal & Compliance​
+6.1 ​Governing Law:
+This Agreement is governed by the laws of the People's Republic of China​ (or other jurisdiction with strong IP enforcement), excluding conflict-of-law principles 
+.
+
+6.2 ​Audit Rights:
+Licensor may audit Licensee’s compliance annually. Non-compliance incurs ​reimbursement of audit costs + 150% of unpaid fees​ 
+.
+
+6.3 ​Updates & Modifications:
+Licensor may unilaterally update terms. Continued use after ​30 days​ of notice constitutes acceptance 
+.
+
+​7. Miscellaneous​
+​No Open Source Contamination: Licensee shall not combine the Software with open-source code (e.g., GPL) to avoid "copyleft" contamination 
+.
+​Export Compliance: Subject to ​EAR (Export Administration Regulations)​​ and ​OFAC sanctions; may not be exported to embargoed regions 
+.
+​Entire Agreement: Supersedes all prior negotiations. Amendments require ​written notarization.
+
+
+严格专有软件许可协议
+
+版本 1.0 | 生效日期：2025年8月10日
+
+第一条 许可授予
+
+1.1 有限、非独占、不可转让许可：  
+许可方授予被许可方一项可撤销的、非独占的许可，仅允许在指定的一台设备上安装并使用本软件，且仅限于内部商业目的。被许可方无权修改、分发、分许可或转让本软件。  
+
+1.2 部署限制：  
+未经书面许可，软件不得用于以下场景：  
+• 高风险系统（如航空、医疗、核能、军事），若故障可能导致人身伤害、死亡或灾难性损失；  
+
+• 云服务（SaaS、PaaS）或公共可访问的网络环境。  
+
+第二条 知识产权
+
+2.1 独占所有权：  
+软件的所有权利、所有权及利益（包括源代码、算法、文档及衍生作品）均归许可方独家所有。被许可方不享有任何所有权。  
+
+2.2 禁止反向工程：  
+被许可方不得：  
+• 对软件进行反向工程、反编译或反汇编；  
+
+• 绕过安全机制或数字版权管理措施；  
+
+• 移除版权标识或水印。  
+
+第三条 保密义务
+
+3.1 保密信息定义：  
+包括软件二进制文件、文档、性能数据及许可方披露的任何技术细节。  
+
+3.2 责任要求：  
+被许可方必须：  
+• 仅限“需知”员工访问；  
+
+• 存储副本需采用AES-256加密级安全措施；  
+
+• 发生未授权泄露时24小时内报告。  
+
+• 不许可转发本网站链接。
+
+第四条 免责声明与责任限制
+
+4.1 无担保：  
+软件按“现状”提供，不承诺性能、适销性或特定用途适用性。许可方不保证无错误运行。  
+
+4.2 零责任：  
+许可方不承担以下责任：  
+• 直接、间接或后果性损害（如数据丢失、收入损失）；  
+
+• 索赔金额超过被许可方支付的总费用；  
+
+• 因被许可方滥用引发的第三方索赔。  
+
+第五条 协议终止
+
+5.1 立即终止条件：  
+• 违反第一、二或三条；  
+
+• 被许可方破产或资不抵债；  
+
+• 未经授权的复制或分发。  
+
+5.2 终止后义务：  
+被许可方必须：  
+• 销毁所有软件副本并提供合规证明；  
+
+• 7日内返还保密材料。  
+
+第六条 法律与合规
+
+6.1 管辖法律：  
+本协议受中华人民共和国法律管辖（或其他知识产权执法严格的法域），排除冲突法原则。  
+
+6.2 审计权：  
+许可方有权每年审计被许可方合规性。若未合规，被许可方需支付审计成本 + 未付费用的150%。  
+
+6.3 更新与修改：  
+许可方可单方面更新条款。通知发出30日后继续使用视为接受。  
+
+第七条 其他条款
+
+• 禁止开源污染：不得将本软件与开源代码（如GPL）结合，避免“著作权”（Copyleft）传染；  
+
+• 出口合规：受《出口管理条例》（EAR） 及OFAC制裁约束，禁止向受制裁地区出口；  
+
+• 完整协议：取代所有先前约定。修改需经书面公证。  

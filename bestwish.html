@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安心养病</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#f0e6ea',
+            soft: '#8a7d86'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .transition-smooth {
+        transition: all 0.3s ease;
+      }
+      .text-soft {
+        color: #8a7d86;
+      }
+    }
+  </style>
+
+  <style>
+    /* 启动动画样式 */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.8s ease-out;
+    }
+
+    #splash-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 彩带文字容器 */
+    .ribbon-text-container {
+      position: relative;
+      width: 80%;
+      max-width: 500px;
+      height: 100px;
+    }
+
+    /* 彩带文字样式 - 初始模糊状态 */
+    .ribbon-char {
+      position: absolute;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: bold;
+      filter: blur(15px); /* 初始模糊效果 */
+      opacity: 0;
+      transform-origin: center;
+    }
+
+    /* 清晰状态的类 */
+    .ribbon-char.sharp {
+      filter: blur(0);
+      transition: filter 1.2s ease-out; /* 模糊到清晰的过渡 */
+    }
+
+    /* 主内容初始隐藏 - 调整过渡时间 */
+    main {
+      opacity: 0;
+      transition: opacity 0.8s ease-in 4s; /* 提前1秒开始显示 */
+    }
+
+    body.loaded main {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="bg-accent/30 min-h-screen font-sans text-gray-700">
+  <!-- 启动动画屏幕 -->
+  <div id="splash-screen">
+    <div class="ribbon-text-container" id="ribbonTextContainer"></div>
+  </div>
+
+  <!-- 导航栏 - 标题居左 -->
+  <nav class="bg-white/80 backdrop-blur-sm fixed w-full top-0 z-10 transition-smooth py-3">
+    <div class="container mx-auto px-4 flex justify-start">
+      <span class="text-sm text-soft">一份关心</span>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-sm p-6 md:p-8 mt-8 transform hover:shadow-md transition-smooth">
+      <!-- 标题 -->
+      <h1 class="text-[clamp(1.5rem,4vw,2rem)] font-light text-center mb-8 text-gray-800">
+        安心静养
+      </h1>
+      
+      <!-- 称呼 -->
+      <div class="text-center text-lg mb-6 text-gray-700">致菡</div>
+      
+      <!-- 祝福内容 - 扩充后的浪漫委婉风格 -->
+      <div class="space-y-4 text-center text-base leading-relaxed">
+        <p>听闻你近来需要些时间休养，心里便一直惦记着</p>
+        <p>愿这段日子能过得轻缓舒适，像被柔软的云朵托着一般</p>
+        <p>不必急于恢复，让身体按照自己的节奏慢慢舒展</p>
+        <p>阳光会悄悄溜进窗棂，清风会轻轻拂过帘角，陪你度过这些时光</p>
+        <p>是谁的关心并不重要，重要的是你能感受到这份暖意</p>
+        <p>只愿你早日舒展眉头，重新拥有轻盈的脚步和明朗的笑容</p>
+        <p>安心照料自己，允许自己慢下来，便是此刻最好的选择</p>
+      </div>
+      
+      <!-- 简单的分隔线 -->
+      <div class="my-6 border-t border-gray-100"></div>
+      
+      <!-- 养病小贴士 -->
+      <div class="space-y-3 text-sm text-soft">
+        <p class="font-medium text-gray-700 mb-2">愿这些能帮到你：</p>
+        <p>• 让睡眠温柔地包裹你，抚平疲惫的褶皱</p>
+        <p>• 让清水悄悄滋润你，带来细微的生机</p>
+        <p>• 让心情静静地陪伴你，不慌不忙地等待</p>
+        <p>• 让阳光偶尔照进心里，带来浅浅的暖意</p>
+      </div>
+      
+      <!-- 署名 -->
+      <div class="mt-8 text-right text-soft italic">
+        ——默默关心你的人
+      </div>
+      
+      <!-- 开发中提示 -->
+      <div class="mt-8 text-center text-xs text-gray-400">
+        更多心意，正在慢慢酝酿....
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 彩带文字动画 - 包含从模糊到清晰的效果
+    function createRibbonText() {
+      const container = document.getElementById('ribbonTextContainer');
+      const text = "安心养病";
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffaa71', '#a77dc2', '#ffd166'];
+      const chars = text.split('');
+      
+      // 计算每个字的位置
+      const containerWidth = container.offsetWidth;
+      const charSpacing = containerWidth / (chars.length + 1);
+      
+      chars.forEach((char, index) => {
+        const charElement = document.createElement('div');
+        charElement.classList.add('ribbon-char');
+        charElement.textContent = char;
+        
+        // 位置计算
+        const leftPos = (index + 1) * charSpacing - 30;
+        charElement.style.left = `${leftPos}px`;
+        charElement.style.top = '50%';
+        charElement.style.transform = 'translate(-50%, -50%)';
+        
+        // 随机颜色（无光影效果）
+        charElement.style.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        container.appendChild(charElement);
+        
+        // 动画效果：先出现，再从模糊变清晰
+        setTimeout(() => {
+          // 出现动画
+          charElement.style.opacity = '1';
+          charElement.style.transition = 'opacity 0.5s ease-out';
+          
+          // 延迟一点时间后开始变清晰
+          setTimeout(() => {
+            charElement.classList.add('sharp');
+          }, 300);
+          
+          // 飘动动画
+          animateChar(charElement);
+        }, index * 400);
+      });
+    }
+    
+    // 单个文字飘动动画
+    function animateChar(element) {
+      const animate = () => {
+        const duration = 3 + Math.random() * 2;
+        const x = (Math.random() - 0.5) * 15;
+        const y = (Math.random() - 0.5) * 15;
+        const rotate = (Math.random() - 0.5) * 8;
+        
+        element.style.transition = `transform ${duration}s ease-in-out`;
+        element.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+        
+        setTimeout(animate, duration * 1000);
+      };
+      
+      animate();
+    }
+
+    // 启动动画逻辑
+    window.addEventListener('DOMContentLoaded', () => {
+      createRibbonText();
+      
+      // 5秒后隐藏启动屏幕
+      setTimeout(() => {
+        const splashScreen = document.getElementById('splash-screen');
+        splashScreen.classList.add('fade-out');
+        document.body.classList.add('loaded');
+      }, 5000);
+    });
+
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 5) {
+        nav.classList.add('py-2', 'shadow-sm');
+        nav.classList.remove('py-3');
+      } else {
+        nav.classList.add('py-3');
+        nav.classList.remove('py-2', 'shadow-sm');
+      }
+    });
+  </script>
+</body>
+<footer class="py-12 px-4 text-center border-t border-ink/10">
+        <p class="text-base mb-6 text-ink/70">纯个人制作的网站，简洁如我对你的心意</p>
+        
+        <p class="text-sm text-ink/50">© 2025 个人Web实践开发项目-安心养病 All rights reserved.</p>
+    </footer>
+</html>
+    

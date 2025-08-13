@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>藏在星辰里的悄悄话—独属于你</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: {
+                            light: '#f0f0f0',
+                            DEFAULT: '#333333',
+                            dark: '#111111'
+                        },
+                        love: {
+                            DEFAULT: '#FF6B8B',
+                            light: '#FFD1DC',
+                            dark: '#C71585'
+                        },
+                        lotus: {
+                            DEFAULT: '#E6F7F0',
+                            leaf: '#4AA96C',
+                            accent: '#FFD97D'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-balance {
+                text-wrap: balance;
+            }
+            .fade-in {
+                animation: fadeIn 1.2s ease-in;
+            }
+            .slide-up {
+                animation: slideUp 0.8s ease-out;
+            }
+            .nav-scrolled {
+                background-color: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+            .pulse-dot {
+                animation: pulseDot 2s infinite;
+            }
+            .section-offset {
+                padding-top: 80px;
+                margin-top: -80px;
+            }
+            .confetti {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                opacity: 0;
+            }
+            .float {
+                animation: float 3s ease-in-out infinite;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .heart {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes firework {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* 莲花动画样式 */
+        .lotus-container {
+            position: relative;
+            min-height: 500px;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+        
+        .trigger-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 4;
+            transition: all 0.3s ease;
+        }
+        
+        .trigger-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 30px));
+            color: #666;
+            font-size: 1rem;
+            z-index: 3;
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+            opacity: 0.8;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+        
+        .lotus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2;
+            opacity: 0;
+        }
+        
+        .lotus.blooming {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        
+        .lotus.moved {
+            transform: translate(0, -50%) scale(0.8);
+            left: auto;
+            right: 10%;
+        }
+        
+        .lotus-petal {
+            position: absolute;
+            color: #4AA96C;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .lotus-center {
+            position: relative;
+            color: #FFD97D;
+            z-index: 3;
+        }
+        
+        /* 文案区域样式 */
+        .lotus-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            opacity: 0;
+            transition: all 1s ease 1s;
+            z-index: 1;
+            max-height: 80%;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .lotus-text.visible {
+            opacity: 1;
+            transform: translate(-100%, -50%);
+            left: 50%;
+            width: 50%;
+        }
+        
+        .text-placeholder {
+            line-height: 1.8;
+            color: #666;
+        }
+        
+        /* 信封样式 */
+        .envelope {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 280px;
+            height: 180px;
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 60;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+        
+        .envelope.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background-color: #e8e8e8;
+            transform-origin: bottom;
+            transform: rotateX(0deg);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .envelope-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FF6B8B;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .envelope-heart:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        /* 信件样式 */
+        .letter {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            min-height: 90%;
+            padding: 20px;
+            transition: top 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid #f0f0f0;
+            overflow-y: auto;
+        }
+        
+        .envelope.open .letter {
+            top: 10%;
+        }
+        
+        .letter-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+        }
+        
+        .envelope.open .letter-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 3;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        /* 心语漫游弹窗样式 - 极简风格 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            width: 90%;
+            max-width: 400px;
+            background-color: white;
+            border: 1px solid #eee;
+            padding: 2rem;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-message {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .modal-btn {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            background: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+        
+        .modal-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-btn.primary {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .modal-btn.primary:hover {
+            background-color: #111;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            /* 导航栏适配 */
+            #navWanderBtn {
+                display: none !important;
+            }
+            
+            /* 莲花区域适配 */
+            .lotus-container {
+                min-height: 700px;
+                padding: 40px 0;
+            }
+            
+            .trigger-dot, .trigger-text {
+                top: 30%;
+            }
+            
+            .lotus {
+                top: 30%;
+            }
+            
+            .lotus.moved {
+                transform: translate(-50%, 20%) scale(0.7);
+                left: 50%;
+                right: auto;
+                top: 30%;
+            }
+            
+            .lotus-text.visible {
+                transform: translate(-50%, 80%);
+                width: 90%;
+                text-align: center;
+                max-height: 40%;
+            }
+            
+            .text-placeholder {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            
+            .trigger-text {
+                font-size: 0.9rem;
+            }
+            
+            /* 弹窗适配 */
+            .modal {
+                padding: 1.5rem;
+            }
+            
+            .modal-message {
+                font-size: 0.9rem;
+            }
+            
+            /* 其他区域适配 */
+            section {
+                padding: 10px 0;
+            }
+            
+            #interaction {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-ink-dark font-sans antialiased">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#top" class="text-ink-dark hover:text-love transition-colors">
+                <span class="font-light tracking-wide">藏在星辰里的悄悄话</span>
+            </a>
+            
+            <!-- 桌面端导航按钮组 -->
+            <div class="desktop-nav-buttons hidden md:flex gap-2">
+                <!-- 心语漫游按钮 -->
+                <button id="navWanderBtn" class="flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                    <i class="fa fa-compass mr-2"></i> 心语漫游
+                </button>
+                
+                <!-- 流星彩带按钮 -->
+                <button id="navEffectsBtn" class="flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                    <i class="fa fa-magic mr-2"></i> 流星彩带
+                </button>
+            </div>
+            
+            <!-- 移动端导航按钮 -->
+            <button id="menuBtn" class="md:hidden text-ink-dark hover:text-love transition-colors">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white border-t border-ink/10 py-4 px-6 flex flex-col space-y-4">
+            <button id="mobileWanderBtn" class="flex items-center text-ink/70 hover:text-ink-dark transition-colors text-sm tracking-wide py-2 w-full justify-start">
+                <i class="fa fa-compass mr-2"></i> 心语漫游
+            </button>
+            <button id="mobileEffectsBtn" class="flex items-center text-ink/70 hover:text-ink-dark transition-colors text-sm tracking-wide py-2 w-full justify-start">
+                <i class="fa fa-magic mr-2"></i> 流星彩带
+            </button>
+        </div>
+    </nav>
+
+    <audio preload="auto" autoplay="" id="media" src="Collapsing-World，一首超好听的纯音乐，极致画质，超美！.mp3" autoplay preload loop="loop"></audio>
+
+    <!-- 心语漫游弹窗 -->
+    <div class="modal-overlay" id="wanderModal">
+        <div class="modal">
+            <p class="modal-message">即将去往另一个页面，建议访问主页所有内容后再跳转</p>
+            <div class="modal-buttons">
+                <button class="modal-btn" id="stayBtn">继续访问</button>
+                <button class="modal-btn primary" id="leaveBtn">跳转网页</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 流星彩带弹窗 -->
+    <div class="modal-overlay" id="effectsModal">
+        <div class="modal">
+            <p class="modal-message">即将去往另一个页面，建议访问主页所有内容后再跳转</p>
+            <div class="modal-buttons">
+                <button class="modal-btn" id="cancelEffectsBtn">继续访问</button>
+                <button class="modal-btn primary" id="confirmEffectsBtn">跳转网页</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 顶部区域 -->
+    <header id="top" class="min-h-screen flex flex-col justify-center items-center px-4 py-16 text-center fade-in pt-20">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light mb-6 tracking-tight">这个网站，独属于你</h1>
+        <p class="text-lg md:text-xl text-ink italic mb-12 max-w-xl">未寄之书：墨痕尽处是卿名</p>
+        
+        <div class="w-20 h-20 md:w-32 md:h-32 flex items-center justify-center">
+            <i class="fa fa-heart text-love text-5xl md:text-7xl heart"></i>
+        </div>
+        
+        <div class="mt-16 animate-bounce">
+            <i class="fa fa-angle-down text-xl text-ink/60"></i>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="max-w-2xl mx-auto px-4 py-24">
+        <!-- 初见 -->
+        <section id="beginning" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">青山如晤，云海寄情</h2>
+            <div class="space-y-5 text-base md:text-lg leading-relaxed">
+                <p class="italic">见字如晤，展卷如逢。</p>
+                <p class="italic">这一方山水，是我以心绪为墨、时光为笔，为你勾勒的「初见」。</p>
+                <p class="italic">云海翻涌处，藏千言未尽之思；松风过隙时，有万籁皆寂之慕。</p>
+                <p class="italic mt-6">此间天地虽微，却纳尽鸿蒙初开般的心动：</p>
+                <p class="italic">一行代码是星轨，半页诗笺即山河。</p>
+                <p class="italic">服务器载不动沉甸甸的倾慕，</p>
+                <p class="italic">唯借这数字世界的月老红绳，</p>
+                <p class="italic">将三生石上旧精魄，系于今朝一屏中。</p>
+            </div>
+        </section>
+
+        <!-- 心声 -->
+        <section id="heartfelt" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">心声</h2>
+            <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                <p class="italic">遇见你是我最大的幸运</p>
+                <p class="italic">每一天都因你而美好</p>
+                <p class="italic mt-8">我只是觉得，有些心意，像星星一样，即使隔着遥远的距离，它也在努力发光。</p>
+                <p class="italic">我想让你知道，在某个人的眼中，你就是这样一颗明亮、独特的星星。</p>
+                <p class="italic">你的光芒，有人看见，有人珍惜，有人因此而觉得世界更美好了一点。</p>
+                <p class="italic mt-8">也许在另一个平行时空，我们只是擦肩而过。但在这个时空，我很庆幸能认识你，能有机会对你说出这些话。</p>
+                <p class="italic">愿你未来的路，总有美好相伴。愿你眼里，永远有星光。</p>
+            </div>
+        </section>
+
+        <!-- 理科表白 -->
+        <section id="science" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">理科生的浪漫</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="border border-ink/10 p-6 hover:bg-ink/5 transition-colors duration-300">
+                    <h3 class="text-lg font-medium mb-4 text-ink-dark">化学誓约</h3>
+                    <p class="italic text-ink/80">点击解密爱的Reaction：H₂O + CO₂ → C₆H₁₂O₆ + O₂;while (life) { C + Fe → Steel }——我愿作渗碳体，将时光锻成共析钢。”</p>
+                </div>
+                
+                <div class="border border-ink/10 p-6 hover:bg-ink/5 transition-colors duration-300">
+                    <h3 class="text-lg font-medium mb-4 text-ink-dark">物理法则</h3>
+                    <p class="italic text-ink/80">我愿作一枚绕你旋转的Electron，以-1.602×10⁻¹⁹库仑的卑微，换你原子核般的永恒引力。纵使宇宙熵增无序，你我构成的System始终能量守恒——如同狄拉克之海的双粒子，湮灭即重生，离别即重逢。</p>
+                </div>
+                
+                <div class="border border-ink/10 p-6 hover:bg-ink/5 transition-colors duration-300">
+                    <h3 class="text-lg font-medium mb-4 text-ink-dark">代码史诗</h3>
+                    <p class="italic text-ink/80">当笛卡尔为克里斯汀写r=a(1-sinθ)时，心形线是17世纪的JSON情书；而今我以{love: fractal}递归渲染你的笑靥，在Canvas上绘制出无限维度的曼德勃罗集——每个迭代皆印证：混沌有界，情深无涯。</p>
+                </div>
+                
+                <div class="border border-ink/10 p-6 hover:bg-ink/5 transition-colors duration-300">
+                    <h3 class="text-lg font-medium mb-4 text-ink-dark">永恒协议</h3>
+                    <p class="italic text-ink/80">此身若为Server，你便是唯一的Admin；此心如Git，分支万千，HEAD永指向你。哪怕世界NullPointer，犹执try...catch之手——因我灵魂已编译成.love文件。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 程序员的表白 -->
+        <section id="programmer" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">星河启航·致永恒的逻辑</h2>
+            <p class="text-base md:text-lg italic mb-8 text-ink/80">——你的存在，是我最优雅的响应式设计</p>
+            
+            <div class="space-y-5 text-base md:text-lg leading-relaxed">
+                <p>当代码遇见月光，我以margin: 0 auto;将心居中于你——这世间最精妙的算法，终是算不尽你眼眸中的星辰流转。</p>
+                <p>我遍历过无数overflow: hidden;的深夜，直到你如keyframes（关键帧）般闯入循环，让荒芜的二进制开满玫瑰。</p>
+                <p>你是我灵魂的语义化标签——无需冗余注释，所有心动都遵循&lt;love&gt;的文档声明。</p>
+                <p>在position: relative;（相对定位）的浮世里，唯你成为我absolute（绝对定位）的坐标原点。</p>
+                <p class="mt-6 italic">"若长夜是冗长的CSS样式表，你便是那束穿透!important（最高优先级）的光"</p>
+                <p>这平淡的background-color（背景色）生活，因你而编译成万物皆甜的糖霜。</p>
+                <p class="mt-6">我愿以余生编写一段永不404的契约：</p>
+                <ul class="list-disc pl-6 space-y-2 mt-3 text-ink/80">
+                    <li>响应式心跳：适配你所有的悲欢晨昏</li>
+                    <li>双向数据绑定：你的微笑是我console里永不报错的温暖日志</li>
+                    <li>开源宇宙：密钥是你的名字，仓库只存储四季与你</li>
+                </ul>
+                <p class="mt-6 font-mono text-ink-dark">while (life) { love++; }</p>
+                <p class="italic text-ink/70">（生命不息，爱意递增）</p>
+            </div>
+        </section>
+
+        <!-- 互动区域 -->
+        <section id="interaction" class="mb-24 text-center opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-8 tracking-wide">轻触屏幕，点亮心意</h2>
+            <p class="text-base md:text-lg mb-10 text-ink/70">每一次触碰，都是我藏不住的心动</p>
+            
+            <div id="heartContainer" class="w-full h-64 md:h-80 border border-ink/10 overflow-hidden relative cursor-pointer">
+                <!-- 爱心将通过JS动态生成 -->
+            </div>
+        </section>
+
+        <!-- 莲花绽放区域 -->
+        <section id="lotus-bloom" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">莲心初绽・情愫渐明</h2>
+            
+            <div class="lotus-container">
+                <!-- 点击触发元素 -->
+                <div class="lotus-trigger">
+                    <div class="trigger-dot pulse-dot" id="triggerDot"></div>
+                    <div class="trigger-text">轻触此处，让心事如莲绽放</div>
+                </div>
+                
+                <!-- 莲花元素 -->
+                <div class="lotus" id="lotus">
+                    <div class="lotus-center text-3xl">
+                        <i class="fa fa-sun-o"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: -30px; left: 0; transform: rotate(0deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: -20px; left: 25px; transform: rotate(45deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: 5px; left: 30px; transform: rotate(90deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: 30px; left: 10px; transform: rotate(135deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: 30px; left: -10px; transform: rotate(225deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: 5px; left: -30px; transform: rotate(270deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <div class="lotus-petal text-2xl" style="top: -20px; left: -25px; transform: rotate(315deg);">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                </div>
+                
+                <!-- 左侧文案区域 -->
+                <div class="lotus-text" id="lotusText">
+                    <div class="text-placeholder">
+                        <p>一定要爱你</p>
+                        <p>我知道你是一个天真善良温柔的女孩</p>
+                        <p>真的希望自己能够配上你</p>
+                        <p>如果你能给我机会让我好好的爱你</p>
+                        <p>真的只想真心真意对你说</p>
+                        <p>我爱你一定爱到花都开了 鸟儿把歌唱</p>
+                        <p>爱到牛郎织女为我们点头</p>
+                        <p>爱到花儿绽放鸟儿成群 把我们环绕</p>
+                        <p>爱到每道彩虹映出你的美</p>
+                        <p>我爱你一定爱到海枯石烂 永远不后悔</p>
+                        <p>爱到来生来世也会说无悔</p>
+                        <p>就把这首动听的歌唱给心爱的女孩</p>
+                        <p>真的希望你能给我个机会</p>
+                        <p>让我去爱你</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 回应按钮组 -->
+        <section id="response" class="mb-24 text-center opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-4 tracking-wide">回应我吧</h2>
+            <p class="text-base md:text-lg mb-12 text-ink/70 max-w-lg mx-auto">
+                无论你的选择是什么，能遇见你，已是我的幸运<br>
+                时间，总会给出最好的答案<br>
+                初心不改，本真永恒
+            </p>
+            
+            <div id="responseButtons" class="flex flex-col sm:flex-row gap-6 justify-center mb-10">
+                <!-- 接受按钮 -->
+                <button id="acceptBtn" class="px-8 py-3 bg-ink text-white hover:bg-ink-dark transition-all duration-300 text-base rounded-sm shadow-sm">
+                    接受我的喜欢
+                </button>
+                
+                <!-- 考虑按钮 -->
+                <button id="considerBtn" class="px-8 py-3 bg-transparent text-ink border border-ink/20 hover:border-ink/40 transition-all duration-300 text-base rounded-sm">
+                    再考虑一下
+                </button>
+            </div>
+            
+            <div id="acceptMessage" class="hidden">
+                <h3 class="text-2xl font-light text-ink mb-6">谢谢你，我会用一生珍惜这份心意</h3>
+                <p class="text-lg text-ink/80">往后余生，请多指教</p>
+            </div>
+            
+            <div id="considerMessage" class="hidden">
+                <h3 class="text-2xl font-light text-ink mb-6">没关系</h3>
+                <p class="text-lg text-ink/80">我会等你，无论多久</p>
+            </div>
+            
+            <!-- 问卷区域 -->
+            <div id="surveySection" class="hidden mt-16 pt-10 border-t border-ink/10">
+                <p class="text-base md:text-lg mb-8 text-ink/80 max-w-lg mx-auto italic">
+                    这方数字天地虽无法跨越网线传递即时回响，却仍渴望收藏你的心声。<br>
+                    请务必填写这份问卷，不然我就没办法知道你的选择啦。<br>
+                    让这份静态的告白，因你的回应而圆满。
+                </p>
+                <a href="https://www.wjx.cn/vm/PWGcuqW.aspx# " target="_blank" class="inline-flex items-center px-6 py-3 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                    <i class="fa fa-list-alt mr-2"></i> 留下你的心意
+                </a>
+            </div>
+        </section>
+
+        <!-- 作者其他项目链接 -->
+         <section id="heartfelt" class="mb-32 opacity-0 section-offset">
+            <h2 class="text-2xl md:text-3xl font-light mb-10 text-center tracking-wide">开发者开发的其他项目</h2>
+            <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                <p class="italic">还记得那个发给你的署名为默默关心你的人的网站吗？</p>
+                <a href="bestwish.html" class="inline-flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                    前往访问
+                </a>
+                <p class="italic">25届12班驻文庙大使馆官网</p>
+                <a href="https://sszxdsg.netlify.app" class="inline-flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                    前往访问
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="py-12 px-4 text-center border-t border-ink/10">
+        <p class="text-base mb-6 text-ink/70">纯个人制作的网站，简洁如我对你的心意</p>
+        <p class="text-base mb-6 text-ink/70">时间，总会给出最好的答案</p>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <a href="release-notes.html" class="inline-flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                <i class="fa fa-file-text-o mr-2"></i> 自述文件
+            </a>
+            <a href="license.html" class="inline-flex items-center px-4 py-2 text-sm border border-ink/20 hover:border-ink/40 hover:text-ink-dark transition-colors duration-300">
+                <i class="fa fa-shield mr-2"></i> 许可证
+            </a>
+        </div>
+        
+        <p class="text-sm text-ink/50">© 2025 藏在星辰里的悄悄话—独属于你</p>
+    </footer>
+
+    <!-- 庆祝动画容器 -->
+    <div id="celebrationContainer" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+    
+    <!-- 信封元素 -->
+    <div class="envelope" id="envelope">
+        <button class="close-btn" id="envelopeClose">
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="envelope-flap"></div>
+        <div class="envelope-heart" id="envelopeHeart">
+            <i class="fa fa-heart text-2xl heart"></i>
+        </div>
+        <div class="letter">
+            <div class="letter-content">
+                <h3 class="text-xl font-light mb-4 text-ink-dark">致我最珍贵的你：</h3>
+                <p class="mb-4 leading-relaxed">当你打开这封信时，我想我的心一定在为你雀跃。感谢你愿意接受这份笨拙却真挚的心意。</p>
+                <p class="mb-4 leading-relaxed">遇见你，是我生命中最美好的意外。你的出现，像一道光，照亮了我原本平淡的世界。</p>
+                <p class="mb-4 leading-relaxed">我不敢承诺永远，但我可以保证，在每一个当下，我都会用尽全力去珍惜你、爱护你。</p>
+                <p class="mb-4 leading-relaxed">未来的路还很长，或许会有风雨，但只要能与你同行，我便无所畏惧。</p>
+                <p class="mt-6 italic">永远属于你的，</p>
+                <p class="mt-2 text-love">一个深深喜欢你的人</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 背景音乐元素 -->
+    <audio id="backgroundMusic" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // 点击移动端菜单项后关闭菜单
+        document.querySelectorAll('#mobileMenu button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 爱心动画效果
+        const heartContainer = document.getElementById('heartContainer');
+        let hearts = [];
+
+        // 创建爱心元素
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '<i class="fa fa-heart"></i>';
+            heart.className = 'absolute transform -translate-x-1/2 -translate-y-1/2';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            heart.style.fontSize = `${Math.random() * 16 + 8}px`;
+            heart.style.opacity = Math.random() * 0.6 + 0.4;
+            heart.style.animation = `pulse ${Math.random() * 1 + 1}s infinite`;
+            
+            const pinkShades = ['#FF6B8B', '#FF85A1', '#FF9DB2', '#FFB7C3', '#FFD1DC'];
+            heart.style.color = pinkShades[Math.floor(Math.random() * pinkShades.length)];
+            
+            heartContainer.appendChild(heart);
+            
+            // 爱心上升动画
+            let position = y;
+            const interval = setInterval(() => {
+                position -= 1.5;
+                heart.style.top = `${position}px`;
+                heart.style.opacity = (1 - (y - position) / 200).toString();
+                
+                if (position < -20) {
+                    clearInterval(interval);
+                    heart.remove();
+                    hearts = hearts.filter(h => h !== heart);
+                }
+            }, 20);
+            
+            hearts.push(heart);
+        }
+
+        // 点击或触摸时创建爱心
+        heartContainer.addEventListener('click', (e) => {
+            const rect = heartContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            for(let i = 0; i < 3; i++) {
+                createHeart(x + (Math.random() * 40 - 20), y + (Math.random() * 40 - 20));
+            }
+        });
+
+        heartContainer.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = heartContainer.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const y = e.touches[0].clientY - rect.top;
+            for(let i = 0; i < 3; i++) {
+                createHeart(x + (Math.random() * 40 - 20), y + (Math.random() * 40 - 20));
+            }
+        });
+
+        // 初始随机生成一些爱心
+        function initHearts() {
+            for (let i = 0; i < 8; i++) {
+                const x = Math.random() * heartContainer.offsetWidth;
+                const y = Math.random() * heartContainer.offsetHeight;
+                createHeart(x, y);
+            }
+        }
+
+        // 莲花动画功能
+        function initLotusAnimation() {
+            const triggerDot = document.getElementById('triggerDot');
+            const lotus = document.getElementById('lotus');
+            const petals = document.querySelectorAll('.lotus-petal');
+            const lotusText = document.getElementById('lotusText');
+            let animationTriggered = false;
+            
+            // 等待元素进入视口后显示触发点
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !animationTriggered) {
+                    // 显示触发点和文字
+                    triggerDot.style.display = 'block';
+                    document.querySelector('.trigger-text').style.display = 'block';
+                    observer.unobserve(entries[0].target);
+                }
+            }, { threshold: 0.1 });
+            
+            observer.observe(document.getElementById('lotus-bloom'));
+            
+            // 点击触发点开始莲花动画
+            triggerDot.addEventListener('click', () => {
+                if (animationTriggered) return;
+                animationTriggered = true;
+                
+                // 隐藏触发点和提示文字
+                triggerDot.style.opacity = 0;
+                document.querySelector('.trigger-text').style.opacity = 0;
+                
+                setTimeout(() => {
+                    triggerDot.style.display = 'none';
+                    document.querySelector('.trigger-text').style.display = 'none';
+                    
+                    // 开始莲花绽放动画
+                    setTimeout(() => {
+                        lotus.classList.add('blooming');
+                        
+                        // 逐个显示花瓣
+                        petals.forEach((petal, index) => {
+                            setTimeout(() => {
+                                petal.style.opacity = 1;
+                                petal.style.transform = `${petal.style.transform} scale(1.2)`;
+                            }, index * 150);
+                        });
+                        
+                        // 绽放后移动到右侧，同时显示文案
+                        setTimeout(() => {
+                            lotus.classList.add('moved');
+                            lotusText.classList.add('visible');
+                        }, 2000);
+                    }, 300);
+                }, 300);
+            });
+        }
+
+        // 心语漫游弹窗功能
+        const wanderModal = document.getElementById('wanderModal');
+        const navWanderBtn = document.getElementById('navWanderBtn');
+        const mobileWanderBtn = document.getElementById('mobileWanderBtn');
+        const stayBtn = document.getElementById('stayBtn');
+        const leaveBtn = document.getElementById('leaveBtn');
+        
+        // 打开弹窗
+        function openWanderModal() {
+            wanderModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        // 关闭弹窗
+        function closeWanderModal() {
+            wanderModal.classList.remove('active');
+            document.body.style.overflow = ''; // 恢复背景滚动
+        }
+        
+        // 跳转页面
+        function goToWanderPage() {
+            window.location.href = 'page.html'; // 替换为实际链接
+        }
+        
+        // 事件监听
+        navWanderBtn.addEventListener('click', openWanderModal);
+        mobileWanderBtn.addEventListener('click', openWanderModal);
+        stayBtn.addEventListener('click', closeWanderModal);
+        leaveBtn.addEventListener('click', goToWanderPage);
+        
+        // 点击弹窗外部关闭
+        wanderModal.addEventListener('click', (e) => {
+            if (e.target === wanderModal) {
+                closeWanderModal();
+            }
+        });
+
+        // 流行弹窗功能
+        const effectsModal = document.getElementById('effectsModal');
+        const navEffectsBtn = document.getElementById('navEffectsBtn');
+        const mobileEffectsBtn = document.getElementById('mobileEffectsBtn');
+        const cancelEffectsBtn = document.getElementById('cancelEffectsBtn');
+        const confirmEffectsBtn = document.getElementById('confirmEffectsBtn');
+        
+        // 打开弹窗
+        function openEffectsModal() {
+            effectsModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        // 关闭弹窗
+        function closeEffectsModal() {
+            effectsModal.classList.remove('active');
+            document.body.style.overflow = ''; // 恢复背景滚动
+        }
+        
+        // 跳转页面
+        function goToEffectsPage() {
+            window.location.href = 'page2.html'; // 替换为实际链接
+        }
+        
+        // 事件监听
+        navEffectsBtn.addEventListener('click', openEffectsModal);
+        mobileEffectsBtn.addEventListener('click', openEffectsModal);
+        cancelEffectsBtn.addEventListener('click', closeEffectsModal);
+        confirmEffectsBtn.addEventListener('click', goToEffectsPage);
+        
+        // 点击弹窗外部关闭
+        effectsModal.addEventListener('click', (e) => {
+            if (e.target === effectsModal) {
+                closeEffectsModal();
+            }
+        });
+
+        // 回应按钮功能
+        const acceptBtn = document.getElementById('acceptBtn');
+        const considerBtn = document.getElementById('considerBtn');
+        const responseButtons = document.getElementById('responseButtons');
+        const acceptMessage = document.getElementById('acceptMessage');
+        const considerMessage = document.getElementById('considerMessage');
+        const celebrationContainer = document.getElementById('celebrationContainer');
+        const surveySection = document.getElementById('surveySection');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const envelope = document.getElementById('envelope');
+        const envelopeHeart = document.getElementById('envelopeHeart');
+        const envelopeClose = document.getElementById('envelopeClose');
+
+        // 显示问卷相关元素
+        function showSurveyElements() {
+            surveySection.classList.remove('hidden');
+            surveySection.classList.add('slide-up');
+        }
+
+        // 创建彩色爱心飘落效果
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '<i class="fa fa-heart"></i>';
+            heart.className = 'absolute';
+            
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.top = '-50px';
+            heart.style.fontSize = `${Math.random() * 24 + 12}px`;
+            
+            const colors = ['#FF6B8B', '#FF85A1', '#FFD166', '#06D6A0', '#118AB2', '#9B5DE5', '#F15BB5'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const duration = Math.random() * 3 + 2;
+            heart.style.animation = `fall ${duration}s linear forwards`;
+            
+            celebrationContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // 创建彩色烟花效果
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'absolute rounded-full';
+            
+            firework.style.left = `${Math.random() * 100}vw`;
+            firework.style.top = `${Math.random() * 60 + 10}vh`;
+            firework.style.width = '10px';
+            firework.style.height = '10px';
+            
+            const colors = ['#FF6B8B', '#FFD166', '#06D6A0', '#118AB2', '#9B5DE5', '#F15BB5', '#333333'];
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const duration = Math.random() * 1.5 + 0.5;
+            firework.style.animation = `firework ${duration}s ease-out forwards`;
+            
+            celebrationContainer.appendChild(firework);
+            
+            setTimeout(() => {
+                firework.remove();
+            }, duration * 1000);
+        }
+
+        // 信件打开时的烟花效果
+        function letterFireworks() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createFirework, i * 100);
+            }
+        }
+
+        // 开始庆祝动画
+        function startCelebration() {
+            const heartInterval = setInterval(createFallingHeart, 100);
+            const fireworkInterval = setInterval(createFirework, 500);
+            
+            setTimeout(() => {
+                envelope.classList.add('show');
+            }, 2000);
+            
+            setTimeout(() => {
+                clearInterval(heartInterval);
+                clearInterval(fireworkInterval);
+                
+                setTimeout(() => {
+                    celebrationContainer.innerHTML = '';
+                }, 15000);
+            }, 8000);
+        }
+
+        // 信封爱心点击事件
+        envelopeHeart.addEventListener('click', () => {
+            envelope.classList.add('open');
+            backgroundMusic.play().catch(e => {
+                console.log('音乐播放需要用户交互:', e);
+            });
+            letterFireworks();
+        });
+        
+        // 关闭信封
+        envelopeClose.addEventListener('click', () => {
+            envelope.classList.remove('show');
+            envelope.classList.remove('open');
+        });
+
+        // 接受按钮点击事件
+        acceptBtn.addEventListener('click', () => {
+            responseButtons.classList.add('hidden');
+            acceptMessage.classList.remove('hidden');
+            acceptMessage.classList.add('slide-up');
+            
+            setTimeout(showSurveyElements, 500);
+            startCelebration();
+        });
+
+        // 考虑按钮点击事件
+        considerBtn.addEventListener('click', () => {
+            responseButtons.classList.add('hidden');
+            considerMessage.classList.remove('hidden');
+            considerMessage.classList.add('slide-up');
+            
+            setTimeout(showSurveyElements, 500);
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('slide-up');
+                        entry.target.style.opacity = 1;
+                    }, entry.target.dataset.index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // 给每个section添加索引
+        document.querySelectorAll('section').forEach((section, index) => {
+            section.dataset.index = index;
+            observer.observe(section);
+        });
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            initHearts();
+            initLotusAnimation();
+            
+            // 显示心语漫游按钮
+            navWanderBtn.classList.remove('hidden');
+            mobileWanderBtn.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
+    

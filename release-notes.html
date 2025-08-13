@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025个人Web实践开发项目 - 发行说明</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066B2',
+                        secondary: '#F0F0F0',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-balance {
+                text-wrap: balance;
+            }
+            .section-fade {
+                scroll-margin-top: 8rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased">
+    <!-- 顶部导航 -->
+    <header class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold">藏在星辰里的悄悄话</h1>
+            <div class="flex gap-2">
+                <a href="index.html" class="text-sm px-3 py-1.5 rounded hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-home mr-1"></i> 首页
+                </a>
+                <a href="license.html" class="text-sm px-3 py-1.5 rounded bg-primary text-white hover:bg-primary/90 transition-colors">许可证</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <!-- 标题区域 -->
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">2025个人Web实践开发项目</h2>
+            <p class="text-gray-600 text-lg mb-6">— 独属于你的悄悄话</p>
+            <div class="flex flex-wrap gap-3 mb-8">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-secondary">
+                    <i class="fa fa-calendar-o mr-1.5"></i> 2025年发布
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-secondary">
+                    <i class="fa fa-html5 mr-1.5"></i> HTML5
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-secondary">
+                    <i class="fa fa-lock mr-1.5"></i> 闭源项目
+                </span>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                本项目核心目标为向<span class="italic">crush表白</span>，通过简洁而富有意义的方式传递你的心意。
+                未经开发者允许，任何个人或组织不得转发本网站链接以及进行许可证中规定不得进行的行为。
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="index.html" class="inline-flex items-center px-5 py-2.5 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回首页
+                </a>
+                <a href="license.html" class="inline-flex items-center px-5 py-2.5 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                    <i class="fa fa-file-text-o mr-2"></i> 查看许可证
+                </a>
+            </div>
+        </div>
+
+        <!-- 特性部分 -->
+        <section id="features" class="mb-16 section-fade">
+            <h3 class="text-2xl font-semibold mb-6 pb-2 border-b border-gray-200">特性</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                    <span>简短有力，<span class="italic">精准表达钦慕之情</span></span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                    <span>不提供技术支持，专注于核心表达功能</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                    <span>基于HTML5创建的纯静态页面，<span class="italic">加载迅速，体验流畅</span></span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 快速开始部分 -->
+        <section id="getting-started" class="mb-16 section-fade">
+            <h3 class="text-2xl font-semibold mb-6 pb-2 border-b border-gray-200">快速开始</h3>
+            <p class="mb-6 text-gray-700">网站中有明确按钮指示，请访问网站的每一个角落，探索其中的心意。</p>
+            
+            <div class="space-y-8">
+                <div>
+                    <h4 class="text-lg font-medium mb-3">1. 前提条件</h4>
+                    <ul class="pl-6 list-disc text-gray-700">
+                        <li>浏览器，建议使用Chrome/edge/IE等<span class="italic">支持mp4文件内置播放的浏览器</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-3">2. 安装</h4>
+                    <p class="text-gray-700">无需安装</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-3">3. 配置 (如果需要)</h4>
+                    <p class="text-gray-700">无需配置</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-3">4. 运行</h4>
+                    <p class="text-gray-700">接入互联网进行访问</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 贡献部分 -->
+        <section id="contributing" class="mb-16 section-fade">
+            <h3 class="text-2xl font-semibold mb-6 pb-2 border-b border-gray-200">如何贡献</h3>
+            <p class="text-gray-700">不支持代码开源</p>
+        </section>
+
+        <!-- 许可证部分 -->
+        <section id="license" class="mb-16 section-fade">
+            <h3 class="text-2xl font-semibold mb-6 pb-2 border-b border-gray-200">许可证</h3>
+            <p class="text-gray-700 mb-4">本项目采用专有软件许可证 - 详情请参阅 <a href="license.html" class="text-primary hover:underline">许可证</a> 文件。</p>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact" class="section-fade">
+            <h3 class="text-2xl font-semibold mb-6 pb-2 border-b border-gray-200">联系方式</h3>
+            <div class="flex items-center text-gray-700">
+                <i class="fa fa-envelope-o mr-3 text-primary"></i>
+                <span>项目负责人：1600313803@qq.com</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-600 text-sm">
+            <p>© 2025 个人Web实践开发项目 - 藏在星辰里的悄悄话</p>
+        </div>
+    </footer>
+
+    <script>
+        // 改进的平滑滚动，手动计算偏移量
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 获取导航栏高度
+                    const header = document.querySelector('header');
+                    const headerHeight = header.offsetHeight;
+                    
+                    // 计算目标位置，考虑导航栏高度并额外增加一些空间
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    
+                    // 平滑滚动到目标位置
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    

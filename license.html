@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专有软件许可协议</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066B2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .section-divider {
+                border-top: 1px solid #e5e7eb;
+                margin: 2rem 0;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .section-link {
+                /* 增加滚动边距 */
+                scroll-margin-top: 8rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased">
+    <!-- 顶部导航 -->
+    <header class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold">许可协议</h1>
+            <div class="flex gap-2">
+                <a href="release-notes.html" class="text-sm px-3 py-1.5 rounded hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-arrow-left mr-1"></i> 返回
+                </a>
+                <button id="toggle-toc" class="text-sm px-3 py-1.5 rounded hover:bg-gray-100 transition-colors md:hidden">
+                    <i class="fa fa-list mr-1"></i> 目录
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- 侧边目录 - 桌面版 -->
+            <aside class="hidden md:block w-64 flex-shrink-0">
+                <nav class="sticky top-24">
+                    <h2 class="text-lg font-medium mb-4">目录</h2>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#grant" class="text-gray-600 hover:text-primary transition-colors">许可授予</a></li>
+                        <li><a href="#ip" class="text-gray-600 hover:text-primary transition-colors">知识产权</a></li>
+                        <li><a href="#confidentiality" class="text-gray-600 hover:text-primary transition-colors">保密义务</a></li>
+                        <li><a href="#disclaimer" class="text-gray-600 hover:text-primary transition-colors">免责声明与责任限制</a></li>
+                        <li><a href="#termination" class="text-gray-600 hover:text-primary transition-colors">协议终止</a></li>
+                        <li><a href="#compliance" class="text-gray-600 hover:text-primary transition-colors">法律与合规</a></li>
+                        <li><a href="#miscellaneous" class="text-gray-600 hover:text-primary transition-colors">其他条款</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- 移动端目录 -->
+            <div id="mobile-toc" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden">
+                <div class="p-4 border-b">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-lg font-medium">目录</h2>
+                        <button id="close-toc" class="p-2">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <nav class="p-4">
+                    <ul class="space-y-3">
+                        <li><a href="#grant" class="block py-2 text-gray-600 hover:text-primary transition-colors">许可授予</a></li>
+                        <li><a href="#ip" class="block py-2 text-gray-600 hover:text-primary transition-colors">知识产权</a></li>
+                        <li><a href="#confidentiality" class="block py-2 text-gray-600 hover:text-primary transition-colors">保密义务</a></li>
+                        <li><a href="#disclaimer" class="block py-2 text-gray-600 hover:text-primary transition-colors">免责声明与责任限制</a></li>
+                        <li><a href="#termination" class="block py-2 text-gray-600 hover:text-primary transition-colors">协议终止</a></li>
+                        <li><a href="#compliance" class="block py-2 text-gray-600 hover:text-primary transition-colors">法律与合规</a></li>
+                        <li><a href="#miscellaneous" class="block py-2 text-gray-600 hover:text-primary transition-colors">其他条款</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- 许可证内容 -->
+            <main class="flex-1">
+                <!-- 许可证参考说明 -->
+                <div class="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                    <p class="text-yellow-800 text-sm">
+                        <i class="fa fa-info-circle mr-2"></i>
+                        本页面展示的严格专有软件协议仅为参考，详情以上传的中英对照版许可证为准
+                    </p>
+                </div>
+                
+                <div class="mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2">严格专有软件许可协议</h2>
+                    <p class="text-gray-600">版本 1.0 | 生效日期：2025年8月10日</p>
+                </div>
+
+                <!-- 1. 许可授予 -->
+                <section id="grant" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第一条 许可授予</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">1.1 有限、非独占、不可转让许可：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            许可方授予被许可方一项可撤销的、非独占的许可，仅允许在指定的一台设备上安装并使用本软件，且仅限于内部商业目的。被许可方无权修改、分发、分许可或转让本软件。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">1.2 部署限制：</h4>
+                        <p class="text-gray-700 leading-relaxed mb-2">未经书面许可，软件不得用于以下场景：</p>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>高风险系统（如航空、医疗、核能、军事），若故障可能导致人身伤害、死亡或灾难性损失；</li>
+                            <li>云服务（SaaS、PaaS）或公共可访问的网络环境。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 2. 知识产权 -->
+                <section id="ip" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第二条 知识产权</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">2.1 独占所有权：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            软件的所有权利、所有权及利益（包括源代码、算法、文档及衍生作品）均归许可方独家所有。被许可方不享有任何所有权。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">2.2 禁止反向工程：</h4>
+                        <p class="text-gray-700 leading-relaxed mb-2">被许可方不得：</p>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>对软件进行反向工程、反编译或反汇编；</li>
+                            <li>绕过安全机制或数字版权管理措施；</li>
+                            <li>移除版权标识或水印。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 3. 保密义务 -->
+                <section id="confidentiality" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第三条 保密义务</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">3.1 保密信息定义：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            包括软件二进制文件、文档、性能数据及许可方披露的任何技术细节。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">3.2 责任要求：</h4>
+                        <p class="text-gray-700 leading-relaxed mb-2">被许可方必须：</p>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>仅限"需知"员工访问；</li>
+                            <li>存储副本需采用AES-256加密级安全措施；</li>
+                            <li>发生未授权泄露时24小时内报告；</li>
+                            <li>不许可转发本网站链接。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 4. 免责声明与责任限制 -->
+                <section id="disclaimer" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第四条 免责声明与责任限制</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">4.1 无担保：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            软件按"现状"提供，不承诺性能、适销性或特定用途适用性。许可方不保证无错误运行。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">4.2 零责任：</h4>
+                        <p class="text-gray-700 leading-relaxed mb-2">许可方不承担以下责任：</p>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>直接、间接或后果性损害（如数据丢失、收入损失）；</li>
+                            <li>索赔金额超过被许可方支付的总费用；</li>
+                            <li>因被许可方滥用引发的第三方索赔。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 5. 协议终止 -->
+                <section id="termination" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第五条 协议终止</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">5.1 立即终止条件：</h4>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>违反第一、二或三条；</li>
+                            <li>被许可方破产或资不抵债；</li>
+                            <li>未经授权的复制或分发。</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">5.2 终止后义务：</h4>
+                        <p class="text-gray-700 leading-relaxed mb-2">被许可方必须：</p>
+                        <ul class="pl-6 list-disc text-gray-700 space-y-1">
+                            <li>销毁所有软件副本并提供合规证明；</li>
+                            <li>7日内返还保密材料。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 6. 法律与合规 -->
+                <section id="compliance" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第六条 法律与合规</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">6.1 管辖法律：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            本协议受中华人民共和国法律管辖（或其他知识产权执法严格的法域），排除冲突法原则。
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-2">6.2 审计权：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            许可方有权每年审计被许可方合规性。若未合规，被许可方需支付审计成本 + 未付费用的150%。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-2">6.3 更新与修改：</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            许可方可单方面更新条款。通知发出30日后继续使用视为接受。
+                        </p>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <!-- 7. 其他条款 -->
+                <section id="miscellaneous" class="mb-8 section-link">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">第七条 其他条款</h3>
+                    
+                    <ul class="pl-6 list-disc text-gray-700 space-y-3">
+                        <li>
+                            <span class="font-medium">禁止开源污染：</span>
+                            不得将本软件与开源代码（如GPL）结合，避免"著作权"（Copyleft）传染；
+                        </li>
+                        <li>
+                            <span class="font-medium">出口合规：</span>
+                            受《出口管理条例》（EAR）及OFAC制裁约束，禁止向受制裁地区出口；
+                        </li>
+                        <li>
+                            <span class="font-medium">完整协议：</span>
+                            取代所有先前约定。修改需经书面公证。
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-600 text-sm">
+            <p>© 2025 个人Web实践开发项目 - 藏在星辰里的悄悄话</p>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端目录控制
+        const toggleTocBtn = document.getElementById('toggle-toc');
+        const closeTocBtn = document.getElementById('close-toc');
+        const mobileToc = document.getElementById('mobile-toc');
+        const tocLinks = mobileToc.querySelectorAll('a');
+
+        toggleTocBtn.addEventListener('click', () => {
+            mobileToc.classList.remove('translate-x-full');
+        });
+
+        closeTocBtn.addEventListener('click', () => {
+            mobileToc.classList.add('translate-x-full');
+        });
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToc.classList.add('translate-x-full');
+            });
+        });
+
+        // 改进的平滑滚动，手动计算偏移量
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 获取导航栏高度
+                    const header = document.querySelector('header');
+                    const headerHeight = header.offsetHeight;
+                    
+                    // 计算目标位置，考虑导航栏高度并额外增加一些空间
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    
+                    // 平滑滚动到目标位置
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
